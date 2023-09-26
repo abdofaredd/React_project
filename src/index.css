@@ -16,4 +16,7 @@ a{
 color: var(--font-color);
 text-decoration: none;
 }
-
+.my_input{
+  background-color: transparent;
+  border:  solid 1px #a8a8a83d;
+}

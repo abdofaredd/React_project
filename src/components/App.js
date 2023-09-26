@@ -18,7 +18,7 @@ let routes = createBrowserRouter([
       { path: 'home',element:<Home/> },
       { path: 'movies',element:<Movies/ > },
       { path: 'tv' ,  element:<Tv/> },
-      { path: 'register' , element:<Register/> },
+      { index: true , element:<Register/> },
       { path: 'people' , element:<People/> },
       { path: 'login' , element:<Login/> },
     ]
