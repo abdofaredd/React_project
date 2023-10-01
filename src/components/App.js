@@ -10,13 +10,12 @@ import Login from './Login/Login';
 import Notfound from './Notfound/NotFound';
 import React, { Suspense } from 'react'
 // const Movies1 = React.lazy(() => import('./Movies/Movies'));
-const Home1 = React.lazy(() => import('./Home/Home'));
 function App() {
 
   let routes = createBrowserRouter([
   {
     path: '/', element: <Layout />, children: [
-      { path: 'home', element: <Home1  /> },
+      { path: 'home', element: <Home  /> },
       { path: 'wishlist',element:<Movies/ > },
       { path: 'details' ,  element:<Tv/> },
       { index: true , element:<Register/> },
