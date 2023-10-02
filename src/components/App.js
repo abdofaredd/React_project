@@ -11,7 +11,6 @@ import Notfound from './Notfound/NotFound';
 import React, { Suspense } from 'react'
 import itemDetails from './itemDetails/itemDetails'
 // const Movies1 = React.lazy(() => import('./Movies/Movies'));
-const Home1 = React.lazy(() => import('./Home/Home'));
 function App() {
 
   let routes = createBrowserRouter([
