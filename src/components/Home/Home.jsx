@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import usePagination from "../usePagination";
 import { addToWishlist, removeFromWishlist } from "../Store/Slice/movieSlice";
-
 export default function Home() {
+
+  let a = useParams();
+
+
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch(); // Initialize dispatch
-
   const { currentPage, nextPage, previousPage } = usePagination(1);
   const wishlist = useSelector((state) => state.wishlistSlice.wishlist); // Get wishlist from Redux state
 
@@ -50,7 +52,7 @@ export default function Home() {
             <Link
               pro={movie}
               className="text-decoration-none"
-              to={`/movieinfo/${movie.id}`}
+              to={`/itemDetails/${movie.id}`}
             >
               <div
                 className="card h-100"
