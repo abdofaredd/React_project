@@ -91,7 +91,7 @@ export default function Movies() {
           </div>
         ))
       ) : (
-        <i className="fas fa-spinner fa-spin fa-2x justify-content-center"></i>
+        <p className=''>NO Movies here add some </p>
       )}
     </div>
   );

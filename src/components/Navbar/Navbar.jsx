@@ -15,7 +15,7 @@ export default function Navbar() {
      {log_f ? <ul className=' list-unstyled flex-column flex-md-row d-flex m-0 align-items-center'>
       <li className=' px-2'> <Link to='home'> Home</Link> </li>
       <li className=' px-2'> <Link to='wishlist'>Wish List</Link> </li>
-      <li className=' px-2'> <Link to='search'>Search</Link></li>
+      {/* <li className=' px-2'> <Link to='search'>Search</Link></li> */}
       {/*  <li className=' px-2'> <Link to='about'>About</Link> </li>*/}
       </ul> :''} 
     </div>
@@ -24,7 +24,7 @@ export default function Navbar() {
         <i className='fab fa-facebook mx-1'></i>
         <i className='fab fa-instagram mx-1'></i>
         <i className='fab fa-twitter mx-1'></i>
-       <i class="fa-solid fa-magnifying-glass"></i>
+        <Link to='search'><i class="fa-solid fa-magnifying-glass"></i></Link>
       </div>
       <ul className=' list-unstyled flex-column flex-md-row d-flex m-0 align-items-center'>
     
