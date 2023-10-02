@@ -9,8 +9,6 @@ export default function Login() {
 
    const dispatch = useDispatch();
   const log_f = useSelector(state => state.logFlage.log_flag);
-  console.log(log_f);
-
 
   const [erroList, seterroList] = useState([]);
 

@@ -18,7 +18,6 @@ export default function Home() {
       `https://api.themoviedb.org/3/movie/popular?api_key=dfee8f79eb74cfe829f62960da0d964e&page=${page}`
     );
     setMovies(data.results);
-    console.log(data.results);
   }
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function Home() {
 
   // Function to handle adding/removing movies from wishlist
   const handleWishlistToggle = (movie) => {
-    if (wishlist.some((m) => m.id === movie.id)) {
+    if (wishlist.some((m) => m === movie)) {
       // If movie is in wishlist, remove it
       dispatch(removeFromWishlist(movie));
     } else {
@@ -65,9 +64,21 @@ export default function Home() {
 
                 <div className="card-body d-flex align-content-between align-items-stretch flex-column">
                   <h5 className="card-title fw-bold">{movie.title}</h5>
-                  <div className="wishlist" onClick={(event)=>event.preventDefault()}>
+                  {/* <div className="wishlist" onClick={(event)=>event.preventDefault()}>
                   <i class="fa-regular fa-heart"></i>
                     
+                  </div> */}
+
+                  <div
+                    className={`wishlist ${
+                      wishlist.some((m) => m === movie.id) ? "filled" : ""
+                    }`}
+                    onClick={(event) => {
+                      handleWishlistToggle(movie.id);
+                      event.preventDefault();
+                    }}
+                  >
+                    <i className="fa-regular fa-heart"></i>
                   </div>
                   <div className="w-25 text-white bg-info top-0 end-0 position-absolute">
                     {movie.vote_average}
