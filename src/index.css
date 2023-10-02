@@ -40,7 +40,7 @@ text-decoration: none;
   text-align: left;
 }
 img {
-  height: 300px !important;
+  height: 400px !important;
   object-fit: cover;
 }
 .wishlist-button {
@@ -48,4 +48,10 @@ img {
   border: none;
   font-size: 24px;
   cursor: pointer;
+}
+.company-img{
+  height: 60px !important;
+  /* width: 60px; */
+object-fit: contain !important;
+background-color: #fff;
 }
