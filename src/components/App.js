@@ -9,6 +9,7 @@ import Register from './Register/Register';
 import Login from './Login/Login';
 import Notfound from './Notfound/NotFound';
 import React, { Suspense } from 'react'
+import itemDetails from './itemDetails/itemDetails'
 // const Movies1 = React.lazy(() => import('./Movies/Movies'));
 const Home1 = React.lazy(() => import('./Home/Home'));
 function App() {
@@ -16,12 +17,13 @@ function App() {
   let routes = createBrowserRouter([
   {
     path: '/', element: <Layout />, children: [
-      { path: 'home', element: <Home1  /> },
+      { path: 'home', element: <Home  /> },
       { path: 'wishlist',element:<Movies/ > },
       { path: 'details' ,  element:<Tv/> },
       { index: true , element:<Register/> },
       { path: 'search' , element:<People/> },
       { path: 'login' , element:<Login  /> },
+      { path: 'itemDetails' , element:<itemDetails  /> },
       { path: '*' , element:<Notfound  /> },
     ]
   }

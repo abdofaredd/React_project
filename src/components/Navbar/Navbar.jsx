@@ -24,8 +24,7 @@ export default function Navbar() {
         <i className='fab fa-facebook mx-1'></i>
         <i className='fab fa-instagram mx-1'></i>
         <i className='fab fa-twitter mx-1'></i>
-        <i className='fab fa-spotify mx-1'></i>
-        <i className='fab fa-youtube mx-1'></i>
+       <i class="fa-solid fa-magnifying-glass"></i>
       </div>
       <ul className=' list-unstyled flex-column flex-md-row d-flex m-0 align-items-center'>
     

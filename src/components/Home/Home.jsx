@@ -36,14 +36,14 @@ setTimeout(() => {
       movies.length > 0 ? movies.map((movie, index) =>
       <div key={index} className="col-lg-3 col-md-3 mb-5 position-relative ">
                    
-        <Link pro={movie} className=' text-decoration-none' to={`/movieinfo/${movie.id}`} >
+        <Link pro={movie} className=' text-decoration-none' to={`/itemDetails`} >
                   
-          <div className="card h-100" style={{ backgroundColor: "lightgrey" }}>
+          <div className="card h-100  position-relative" style={{ backgroundColor: "lightgrey" }}>
             <img className="  " src={`https://image.tmdb.org/t/p/w500//${movie.backdrop_path}`} alt="Card image cap" />
               
             <div className="card-body d-flex    align-content-between align-items-stretch flex-column">
-              <h5 className="card-title  fw-bold ">{movie.title}</h5>
-                <div className='w-25 text-white bg-info top-0 end-0 position-absolute'>${movie.vote_average }</div>
+              <h5 className="card-title my-2  fw-bold ">{movie.title}</h5>
+                <div className='vote p-2 w-25 text-dark bg-warning top-0 end-0 position-absolute'>{movie.vote_average }</div>
             </div>
 
           </div>
