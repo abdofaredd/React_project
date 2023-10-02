@@ -10,7 +10,6 @@ const Home = React.lazy(() => import('./../Home/Home'));
 const Notfound = React.lazy(() => import('./../Notfound/NotFound'));
 const People = React.lazy(() => import('./../People/People'));
 const Movies = React.lazy(() => import('./../Movies/Movies'));  
-
 export default function Router() {
 
   return (

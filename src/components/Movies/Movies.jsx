@@ -52,7 +52,7 @@ export default function Movies() {
             <Link
               pro={movie}
               className="text-decoration-none"
-              to={`/movieinfo/${movie.id}`}
+              to={`/itemDetails/${movie.id}`}
             >
               <div
                 className="card h-100"
@@ -82,7 +82,7 @@ export default function Movies() {
                   >
                     <i className="fa-regular fa-heart"></i>
                   </div>
-                  <div className="w-25 text-white bg-info top-0 end-0 position-absolute">
+                  <div className="w-25 py-2 vote text-white bg-warning top-0 end-0 position-absolute">
                     {movie.vote_average}
                   </div>
                 </div>
