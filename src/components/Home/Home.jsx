@@ -65,25 +65,29 @@ export default function Home() {
                   alt="Card image cap"
                 />
 
-                <div className="card-body d-flex align-content-between align-items-stretch flex-column">
-                  <h5 className="card-title fw-bold">{movie.title}</h5>
-                  {/* <div className="wishlist" onClick={(event)=>event.preventDefault()}>
-                  <i class="fa-regular fa-heart"></i>
-                    
-                  </div> */}
+                <div className="card-body d-flex  text-start align-items-stretch flex-column  ">
+                <div className="row justify-content-between h-50">
+                <h6 className="card-title fw-bold col-9">{movie.title}</h6>
+                 
+                 <div className="col-2">
+                 <div
+                                     className={`wishlist ${
+                                       wishlist.some((m) => m === movie.id) ? "filled" : ""
+                                     }`}
+                                     onClick={(event) => {
+                                       handleWishlistToggle(movie.id);
+                                       event.preventDefault();
+                                     }}
+                                   >
+                                     <i className="fa-regular fa-heart"></i>
+                                   </div>
+                 </div>
+                </div>
+                  <div className="row h-25 justify-content-between ">
 
-                  <div
-                    className={`wishlist ${
-                      wishlist.some((m) => m === movie.id) ? "filled" : ""
-                    }`}
-                    onClick={(event) => {
-                      handleWishlistToggle(movie.id);
-                      event.preventDefault();
-                    }}
-                  >
-                    <i className="fa-regular fa-heart"></i>
+                    <p className="col-5"> <span>{movie.release_date}</span></p>
                   </div>
-                  <div className="w-25 text-white bg-info top-0 end-0 position-absolute">
+                  <div className="w-25 px-2 p-1 text-center text-white bg-info top-0 end-0 position-absolute">
                     {movie.vote_average}
                   </div>
                 </div>
