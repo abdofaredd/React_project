@@ -3,9 +3,10 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link,useParams } from "react-router-dom";
 import usePagination from "../usePagination";
-import { addRemoveFavorite } from "../Store/Slice/movieSlice";
+import { removeFromWishlist,addToWishlist } from "../Store/Slice/movieSlice";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+// import FavoriteIcon from '@mui/icons-material/Favorite';
 export default function Home() {
-
   let a = useParams();
 
 
@@ -13,7 +14,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch(); // Initialize dispatch
   const { currentPage, nextPage, previousPage } = usePagination(1);
-  const wishlist = useSelector((state) => state.wishlistSlice); // Get wishlist from Redux state
+  const wishlist = useSelector((state) => state.wishlistSlice.wishlist); // Get wishlist from Redux state
 console.log(wishlist);
   async function getMovies(page) {
     const { data } = await axios.get(
@@ -33,17 +34,13 @@ console.log(wishlist);
 
   const log_f = useSelector((state) => state.logFlage.log_flag);
 
-  // Function to handle adding/removing movies from wishlist
-  // const handleWishlistToggle = (movie) => {
-
-    // if (wishlist.some((m) => m === movie)) {
-    //   // If movie is in wishlist, remove it
-    //   dispatch(addRemoveFavorite(movie));
-    // } else {
-    //   // If movie is not in wishlist, add it
-    //   dispatch(addToWishlist(movie));
-    // }
-  // }; 
+  const handleWishlistToggle = (movie) => {
+    if (wishlist.some((m) => m === movie)) {
+      dispatch(removeFromWishlist(movie));
+    } else {
+      dispatch(addToWishlist(movie));
+    }
+  };
 
 
   return (
@@ -71,16 +68,26 @@ console.log(wishlist);
                 <h6 className="card-title fw-bold col-9">{movie.title}</h6>
                  
                  <div className="col-2">
-                 <div
-                                     className={`wishlist ${
-                                       wishlist.some((m) => m === movie.id) ? "filled" : ""
-                                     }`}
-                                     onClick={(event) => {
-                                      dispatch(addRemoveFavorite(movie));
-                                      event.preventDefault();
-                                    }}
-                                   >
-                                     <i className="fa-regular fa-heart"></i>
+                 <div onClick={(event) => {handleWishlistToggle(movie.id);event.preventDefault(); }}>
+                                      {
+
+                                      wishlist.some((m) => m === movie.id) ? (<Favorite
+                                        sx={{ color: '131722' }}
+                                        style={{ cursor: "pointer" }}
+                                        fontSize="large"
+                                      />
+                                      ):(
+                                        <FavoriteBorder
+                                                        sx={{ color: '131722' }}
+                                                        fontSize="large"
+                                                        style={{ cursor: "pointer" }}
+                                                      />
+
+                                      )
+
+                                      }
+
+
                                    </div>
                  </div>
                 </div>
@@ -89,7 +96,7 @@ console.log(wishlist);
                     <p className="col-10"> <span>{movie.release_date}</span></p>
                   </div>
                   <div className="w-25 px-2 p-1 text-center text-white bg-info top-0 end-0 position-absolute">
-                    {movie.vote_average}
+                   {parseFloat(movie.vote_average).toFixed(1)}
                   </div>
                 </div>
               </div>

@@ -43,6 +43,10 @@ img {
   height: 400px !important;
   object-fit: cover;
 }
+.img_recomand {
+  height: 250px !important;
+  object-fit: cover;
+}
 .wishlist-button {
   background: none;
   border: none;
@@ -54,9 +58,4 @@ img {
   /* width: 60px; */
 object-fit: contain !important;
 background-color: #fff;
-}
-.filled{
-  color: red;
-  /* background-color: red; */
-  
 }

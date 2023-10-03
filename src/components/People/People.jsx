@@ -1,25 +1,27 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { addRemoveFavorite } from "../Store/Slice/movieSlice";
+import { removeFromWishlist ,addToWishlist} from "../Store/Slice/movieSlice";
 import { useDispatch, useSelector } from "react-redux";
+
+// import { Favorite, FavoriteBorder } from "@mui/icons-material";
+
+
+
+
+
+
+
+
 
 export default function People() {
   const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searched, setSearched] = useState(false);
   const dispatch = useDispatch();
-  const wishlist = useSelector((state) => state.wishlistSlice);
+  const wishlist = useSelector((state) => state.wishlistSlice.wishlist);
 
-  // const handleWishlistToggle = (movie) => {
-  //   if (wishlist.some((m) => m === movie)) {
-  //     // If movie is in wishlist, remove it
-  //     dispatch(removeFromWishlist(movie));
-  //   } else {
-  //     // If movie is not in wishlist, add it
-  //     dispatch(addToWishlist(movie));
-  //   }
-  // };
+
 
   const handleSearch = () => {
     axios
@@ -83,7 +85,11 @@ export default function People() {
                           wishlist.some((m) => m === movie.id) ? "filled" : ""
                         }`}
                         onClick={(event) => {
-                          dispatch(addRemoveFavorite(movie));
+                          dispatch(
+                            wishlist.some((m) => m === movie.id)
+                              ? removeFromWishlist(movie.id)
+                              : addToWishlist(movie.id)
+                          );
                           event.preventDefault();
                         }}
                       >
@@ -91,7 +97,8 @@ export default function People() {
                       </div>
 
                       <div className="w-25 text-white bg-info top-0 end-0 position-absolute">
-                        {movie.vote_average}
+                      {parseFloat(movie.vote_average).toFixed(1)}
+
                       </div>
                     </div>
                   </div>

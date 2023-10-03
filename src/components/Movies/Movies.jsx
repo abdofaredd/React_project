@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { addRemoveFavorite } from '../Store/Slice/movieSlice';
+import { removeFromWishlist } from '../Store/Slice/movieSlice';
+// import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 export default function Movies() {
-  const wish = useSelector((state) => state.wishlistSlice);
+  const wish = useSelector((state) => state.wishlistSlice.wishlist);
   const dispatch = useDispatch()
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +28,7 @@ export default function Movies() {
     async function fetchMovies() {
       const newMovies = [];
       for (const movieId of wish) {
-        const movieData = await getMovieData(movieId.id);
+        const movieData = await getMovieData(movieId);
         if (movieData) {
           newMovies.push(movieData);
         }
@@ -80,13 +81,14 @@ console.log(newMovies);
                     }`}
                     onClick={(e) => {
                       e.preventDefault();
-                      dispatch(addRemoveFavorite(movie));
+                      dispatch(removeFromWishlist(movie.id));
                     }}
                   >
                     <i className="fa-regular fa-heart"></i>
                   </div>
                   <div className="w-25 py-2 vote text-white bg-warning top-0 end-0 position-absolute">
-                    {movie.vote_average}
+                  {parseFloat(movie.vote_average).toFixed(1)}
+
                   </div>
                 </div>
               </div>
@@ -94,7 +96,7 @@ console.log(newMovies);
           </div>
         ))
       ) : (
-        <p className=''>NO Movies here add some </p>
+        <div className=' m-5 p-5'>NO Movies here add some </div>
       )}
     </div>
   );

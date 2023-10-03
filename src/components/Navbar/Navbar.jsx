@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import logFlage, { F_flag, logToggle } from '../Store/Slice/logFlage';
 import { useDispatch, useSelector } from 'react-redux';
+
+
 export default function Navbar() {
    const dispatch = useDispatch();
 
   const log_f = useSelector(state => state.logFlage.log_flag);
-  
+  const { DarkMode, toggleDarkMode } = useContext(ThemeContext);
+  const { language, toggleLanguage } = useContext(LanguageContext);
   // const log_o = useSelector(state => state.logFlage.logToggle);
   return <nav className=' p-2 flex-column flex-md-row d-flex justify-content-between'>
     <div className='leftnav  flex-column flex-md-row d-flex align-items-center'>
@@ -20,11 +23,26 @@ export default function Navbar() {
       </ul> :''} 
     </div>
     <div className='right-nav  flex-column flex-md-row d-flex align-items-center'>
+    <Link to='search'><i className="fa-solid fa-magnifying-glass"></i></Link>
+
       <div className='social-media'>
         <i className='fab fa-facebook mx-1'></i>
-        <i className='fab fa-instagram mx-1'></i>
-        <i className='fab fa-twitter mx-1'></i>
-        <Link to='search'><i className="fa-solid fa-magnifying-glass"></i></Link>
+  
+<div>
+            <button onClick={toggleLanguage} className="border-0 m-2 btn navbar-brand">
+              {language}
+            </button>
+          </div>
+
+          <div className="m-2 navbar-brand">
+      <button
+        className={`toggle-button ${DarkMode ? "dark" : "light"} btn border-0 `}
+        onClick={toggleDarkMode}
+      >
+        <i className={`fas ${DarkMode ? "fa-moon": "fa-sun"}`}></i>
+        <span className="ball"></span>
+      </button>
+    </div>
       </div>
       <ul className=' list-unstyled flex-column flex-md-row d-flex m-0 align-items-center'>
     
