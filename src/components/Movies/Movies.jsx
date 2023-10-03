@@ -45,6 +45,8 @@ console.log(newMovies);
     }
   }, [wish]);
 
+  
+
   return (
     <div className="row text-center position-relative">
       {movies.length > 0 ? (

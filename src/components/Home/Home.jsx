@@ -45,6 +45,7 @@ console.log(wishlist);
     // }
   // }; 
 
+
   return (
     <div className="row text-center position-relative">
       {movies.length > 0 ? (
