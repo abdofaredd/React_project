@@ -44,6 +44,8 @@ export default function Movies() {
     }
   }, [wish]);
 
+  
+
   return (
     <div className="row text-center position-relative">
       {movies.length > 0 ? (

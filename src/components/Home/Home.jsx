@@ -44,6 +44,7 @@ export default function Home() {
     }
   };
 
+
   return (
     <div className="row text-center position-relative">
       {movies.length > 0 ? (
