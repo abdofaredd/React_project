@@ -8,12 +8,18 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './components/Store/index';
+import { ThemeProvider } from './components/Context/ThemeContext';
+import { LanguageProvider } from './components/Context/language';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(  
   <Provider store={store}>
   <React.StrictMode>
+    <LanguageProvider>
+    <ThemeProvider>
 <App/>
+</ThemeProvider>
+</LanguageProvider>
     </React.StrictMode>
   </Provider>
     

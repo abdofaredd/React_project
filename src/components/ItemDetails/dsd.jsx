@@ -60,31 +60,56 @@ export default function ItemDetails() {
   return (
     <>
       <div>
+      <div  className="   float-end"
+                            onClick={(event) => {
+                              handleWishlistToggle(itemdetails.id);
+                              event.preventDefault();
+                            }}
+                          >
+                            {wishlist.some((m) => m === itemdetails.id) ? (
+                              <Favorite
+                                sx={{ color: "131722" }}
+                                style={{ cursor: "pointer" }}
+                                fontSize="large"
+                              />
+                            ) : (
+                              <FavoriteBorder
+                                sx={{ color: "131722" }}
+                                fontSize="large"
+                                style={{ cursor: "pointer" }}
+                              />
+                            )}
+                          </div>
         <div className="row mt-4   p-3">
-          <div className="col-md-4 position-relative ">
+          <div className="col-md-4  ">
             <img
               className="w-100 h-100"
               src={`https://image.tmdb.org/t/p/w500/${itemdetails.poster_path}`}
             />
           </div>
-          <div className="col-md-8 ">
+          <div className="col-md-8 position-relative ">
+         
             <h2>{itemdetails.title}</h2>
             <h4 className="h6">
               {itemdetails.release_date}
               <span className="m-5 p-1  bg-danger">{itemdetails.status}</span>
             </h4>
-
+            
             <p className="py-2 h5   ">{itemdetails.overview}</p>
-            <h6 className="py-2 text-warning">
-              vote_average :
-              <span className=" text-white">
-                {" "}
-                {parseFloat(itemdetails.vote_average).toFixed(1)}
-              </span>
+            <h6 className="py-2 ">
+              vote_average : 
+              <strong>
+              <span className="ms-2">
+              
+               {parseFloat(itemdetails.vote_average).toFixed(1)}
+            </span>
+              </strong>
+             
             </h6>
-            <h6 className="py-2 text-warning">
+            <h6 className="py-2 ">
               vote_average :
-              <span className=" text-white"> {itemdetails.vote_count}</span>
+           <strong><span  className="ms-2" > {itemdetails.vote_count}</span>
+            </strong>   
             </h6>
             <div>
               {itemdetails.genres && itemdetails.genres.length > 0 && (
@@ -157,7 +182,7 @@ export default function ItemDetails() {
                   to={`/itemDetails/${movie.id}`}
                 >
                   <div
-                    className="card h-75"
+                    className="card h-100"
                     style={{ backgroundColor: "lightgrey" }}
                   >
                     <img
@@ -166,14 +191,22 @@ export default function ItemDetails() {
                       alt="Card image cap"
                     />
 
-                    <div className="card-body d-flex  text-start align-items-stretch flex-column h-25 ">
+                    <div className="card-body d-flex  text-start  flex-column h-25 ">
                       <div className="row justify-content-between h-50 ">
-                        <h6 className="card-title fw-bold col-7 " style={{'font-size':'13px'}}>
+                        <h6 className="card-title fw-bold  " style={{'font-size':'13px'}}>
                           {movie.title}
                         </h6>
 
-                        <div className="col-2 position-absolute top-0 start-0" >
-                          <div 
+                        <div className="col-2 position-absolute top-80 end-0" >
+                      
+                        </div>
+                      </div>
+                      <div className="row mt-3 h-25 justify-content-between   align-content-center ">
+                        <p className="col-9">
+                          {" "}
+                          <span>{movie.release_date}</span>
+                        </p>
+                        <div  className="col-3"
                             onClick={(event) => {
                               handleWishlistToggle(movie.id);
                               event.preventDefault();
@@ -193,13 +226,6 @@ export default function ItemDetails() {
                               />
                             )}
                           </div>
-                        </div>
-                      </div>
-                      <div className="row mt-1 h-25 justify-content-between ">
-                        <p className="col-10">
-                          {" "}
-                          <span>{movie.release_date}</span>
-                        </p>
                       </div>
                       <div className="w-25 px-2 p-1 text-center text-white bg-info top-0 end-0 position-absolute">
                         {parseFloat(movie.vote_average).toFixed(1)}
@@ -210,7 +236,7 @@ export default function ItemDetails() {
               </div>
             ))
           ) : (
-            <i className="fas fa-spinner fa-spin fa-2x justify-content-center"></i>
+           ''
           )}
         </div>
       </div>

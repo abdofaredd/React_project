@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { removeFromWishlist ,addToWishlist} from "../Store/Slice/movieSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 // import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 
@@ -93,7 +93,19 @@ export default function People() {
                           event.preventDefault();
                         }}
                       >
-                        <i className="fa-regular fa-heart"></i>
+                        {wishlist.some((m) => m === movie.id) ? (
+                          <Favorite
+                            sx={{ color: '131722' }}
+                            style={{ cursor: "pointer" }}
+                            fontSize="large"
+                          />
+                        ) : (
+                          <FavoriteBorder
+                            sx={{ color: '131722' }}
+                            fontSize="large"
+                            style={{ cursor: "pointer" }}
+                          />
+                        )}
                       </div>
 
                       <div className="w-25 text-white bg-info top-0 end-0 position-absolute">

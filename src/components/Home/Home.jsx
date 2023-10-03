@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link,useParams } from "react-router-dom";
 import usePagination from "../usePagination";
 import { removeFromWishlist,addToWishlist } from "../Store/Slice/movieSlice";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import ThemeContext from '../Context/ThemeContext'
+
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 export default function Home() {
   let a = useParams();
 
+  const { DarkMode, toggleDarkMode } = useContext(ThemeContext);
 
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +58,7 @@ console.log(wishlist);
             >
               <div
                 className="card h-100"
-                style={{ backgroundColor: "lightgrey" }}
+                style={  {  backgroundColor: "lightgrey" }}
               >
                 <img
                   className=""

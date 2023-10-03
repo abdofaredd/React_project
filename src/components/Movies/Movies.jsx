@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { removeFromWishlist } from '../Store/Slice/movieSlice';
 // import { Favorite, FavoriteBorder } from "@mui/icons-material";
-
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { addToWishlist , removeFromWishlist } from "../Store/Slice/movieSlice";
 export default function Movies() {
   const wish = useSelector((state) => state.wishlistSlice.wishlist);
   const dispatch = useDispatch()
@@ -46,7 +46,13 @@ console.log(newMovies);
     }
   }, [wish]);
 
-  
+  const handleWishlistToggle = (movie) => {
+    if (wish.some((m) => m === movie)) {
+      dispatch(removeFromWishlist(movie));
+    } else {
+      dispatch(addToWishlist(movie));
+    }
+  };
 
   return (
     <div className="row text-center position-relative">
@@ -75,16 +81,28 @@ console.log(newMovies);
                     
                   </div> */}
 
-                  <div
-                    className={`wishlist ${
-                      wish.some((m) => m === movie.id) ? "filled" : ""
-                    }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(removeFromWishlist(movie.id));
-                    }}
-                  >
-                    <i className="fa-regular fa-heart"></i>
+<div className="col-2">
+                    {wish.some((m) => m === movie.id) ? (
+                      <Favorite
+                        onClick={(event) => {
+                          handleWishlistToggle(movie.id);
+                          event.preventDefault();
+                        }}
+                        sx={{ color: '131722' }}
+                        style={{ cursor: "pointer" }}
+                        fontSize="large"
+                      />
+                    ) : (
+                      <FavoriteBorder
+                        onClick={(event) => {
+                          handleWishlistToggle(movie.id);
+                          event.preventDefault();
+                        }}
+                        sx={{ color: '131722' }}
+                        fontSize="large"
+                        style={{ cursor: "pointer" }}
+                      />
+                    )}
                   </div>
                   <div className="w-25 py-2 vote text-white bg-warning top-0 end-0 position-absolute">
                   {parseFloat(movie.vote_average).toFixed(1)}

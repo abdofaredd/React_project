@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import logFlage, { F_flag, logToggle } from '../Store/Slice/logFlage';
 import { useDispatch, useSelector } from 'react-redux';
-
+import LanguageContext from '../Context/language'
+import ThemeContext from '../Context/ThemeContext'
 
 export default function Navbar() {
    const dispatch = useDispatch();
@@ -26,23 +27,24 @@ export default function Navbar() {
     <Link to='search'><i className="fa-solid fa-magnifying-glass"></i></Link>
 
       <div className='social-media'>
-        <i className='fab fa-facebook mx-1'></i>
-  
-<div>
-            <button onClick={toggleLanguage} className="border-0 m-2 btn navbar-brand">
+        <i className=' mx-1'><button onClick={toggleLanguage} className="border-0  btn navbar-brand">
               {language}
-            </button>
-          </div>
-
-          <div className="m-2 navbar-brand">
-      <button
+            </button></i>
+        <i className=' mx-1'> <button
         className={`toggle-button ${DarkMode ? "dark" : "light"} btn border-0 `}
         onClick={toggleDarkMode}
       >
         <i className={`fas ${DarkMode ? "fa-moon": "fa-sun"}`}></i>
         <span className="ball"></span>
-      </button>
-    </div>
+      </button></i>
+  
+{/* <div>
+            <button onClick={toggleLanguage} className="border-0  btn navbar-brand">
+              {language}
+            </button>
+          </div> */}
+
+
       </div>
       <ul className=' list-unstyled flex-column flex-md-row d-flex m-0 align-items-center'>
     
