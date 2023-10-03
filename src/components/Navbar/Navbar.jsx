@@ -7,6 +7,9 @@ import ThemeContext from '../Context/ThemeContext'
 
 export default function Navbar() {
    const dispatch = useDispatch();
+   const count = useSelector((state) => state.wishlistSlice.wishlist);
+
+  
 
   const log_f = useSelector(state => state.logFlage.log_flag);
   const { DarkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -18,7 +21,10 @@ export default function Navbar() {
      
      {log_f ? <ul className=' list-unstyled flex-column flex-md-row d-flex m-0 align-items-center'>
       <li className=' px-2'> <Link to='home'> Home</Link> </li>
-      <li className=' px-2'> <Link to='wishlist'>Wish List</Link> </li>
+      <li className=' px-3  position-relative'> <Link to='wishlist'> WishList </Link>    {count.length > 0 && (
+              <span className="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
+                {count.length}
+              </span> )} </li>
       {/* <li className=' px-2'> <Link to='search'>Search</Link></li> */}
       {/*  <li className=' px-2'> <Link to='about'>About</Link> </li>*/}
       </ul> :''} 
