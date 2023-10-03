@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link,useParams } from "react-router-dom";
 import usePagination from "../usePagination";
-import { addToWishlist, removeFromWishlist } from "../Store/Slice/movieSlice";
+import { addRemoveFavorite } from "../Store/Slice/movieSlice";
 export default function Home() {
 
   let a = useParams();
@@ -13,8 +13,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch(); // Initialize dispatch
   const { currentPage, nextPage, previousPage } = usePagination(1);
-  const wishlist = useSelector((state) => state.wishlistSlice.wishlist); // Get wishlist from Redux state
-
+  const wishlist = useSelector((state) => state.wishlistSlice); // Get wishlist from Redux state
+console.log(wishlist);
   async function getMovies(page) {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/movie/popular?api_key=dfee8f79eb74cfe829f62960da0d964e&page=${page}`
@@ -34,21 +34,22 @@ export default function Home() {
   const log_f = useSelector((state) => state.logFlage.log_flag);
 
   // Function to handle adding/removing movies from wishlist
-  const handleWishlistToggle = (movie) => {
-    if (wishlist.some((m) => m === movie)) {
-      // If movie is in wishlist, remove it
-      dispatch(removeFromWishlist(movie));
-    } else {
-      // If movie is not in wishlist, add it
-      dispatch(addToWishlist(movie));
-    }
-  };
+  // const handleWishlistToggle = (movie) => {
+
+    // if (wishlist.some((m) => m === movie)) {
+    //   // If movie is in wishlist, remove it
+    //   dispatch(addRemoveFavorite(movie));
+    // } else {
+    //   // If movie is not in wishlist, add it
+    //   dispatch(addToWishlist(movie));
+    // }
+  // }; 
 
   return (
     <div className="row text-center position-relative">
       {movies.length > 0 ? (
         movies.map((movie, index) => (
-          <div key={index} className="col-lg-3 col-md-3 mb-5 position-relative">
+          <div key={index} className="col-lg-3 col-md-2 mb-5 position-relative">
             <Link
               pro={movie}
               className="text-decoration-none"
@@ -74,17 +75,17 @@ export default function Home() {
                                        wishlist.some((m) => m === movie.id) ? "filled" : ""
                                      }`}
                                      onClick={(event) => {
-                                       handleWishlistToggle(movie.id);
-                                       event.preventDefault();
-                                     }}
+                                      dispatch(addRemoveFavorite(movie));
+                                      event.preventDefault();
+                                    }}
                                    >
                                      <i className="fa-regular fa-heart"></i>
                                    </div>
                  </div>
                 </div>
-                  <div className="row h-25 justify-content-between ">
+                  <div className="row mt-1 h-25 justify-content-between ">
 
-                    <p className="col-5"> <span>{movie.release_date}</span></p>
+                    <p className="col-10"> <span>{movie.release_date}</span></p>
                   </div>
                   <div className="w-25 px-2 p-1 text-center text-white bg-info top-0 end-0 position-absolute">
                     {movie.vote_average}

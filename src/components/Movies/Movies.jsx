@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { removeFromWishlist } from '../Store/Slice/movieSlice';
+import { addRemoveFavorite } from '../Store/Slice/movieSlice';
 
 export default function Movies() {
-  const wish = useSelector((state) => state.wishlistSlice.wishlist);
+  const wish = useSelector((state) => state.wishlistSlice);
   const dispatch = useDispatch()
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   async function getMovieData(movieId) {
     try {
       const response = await axios.get(
@@ -28,16 +27,18 @@ export default function Movies() {
     async function fetchMovies() {
       const newMovies = [];
       for (const movieId of wish) {
-        const movieData = await getMovieData(movieId);
+        const movieData = await getMovieData(movieId.id);
         if (movieData) {
           newMovies.push(movieData);
         }
       }
       setMovies(newMovies);
       setIsLoading(false);
+console.log(newMovies);
+
     }
 
-    if (wish.length > 0) {
+    if (wish.length >= 0) {
       fetchMovies();
     } else {
       setIsLoading(false);
@@ -75,9 +76,9 @@ export default function Movies() {
                     className={`wishlist ${
                       wish.some((m) => m === movie.id) ? "filled" : ""
                     }`}
-                    onClick={(event) => {
-                      dispatch(removeFromWishlist(movie.id));
-                      event.preventDefault();
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(addRemoveFavorite(movie));
                     }}
                   >
                     <i className="fa-regular fa-heart"></i>

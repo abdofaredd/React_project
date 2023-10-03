@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { addToWishlist, removeFromWishlist } from "../Store/Slice/movieSlice";
+import { addRemoveFavorite } from "../Store/Slice/movieSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function People() {
@@ -9,17 +9,17 @@ export default function People() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searched, setSearched] = useState(false);
   const dispatch = useDispatch();
-  const wishlist = useSelector((state) => state.wishlistSlice.wishlist);
+  const wishlist = useSelector((state) => state.wishlistSlice);
 
-  const handleWishlistToggle = (movie) => {
-    if (wishlist.some((m) => m === movie)) {
-      // If movie is in wishlist, remove it
-      dispatch(removeFromWishlist(movie));
-    } else {
-      // If movie is not in wishlist, add it
-      dispatch(addToWishlist(movie));
-    }
-  };
+  // const handleWishlistToggle = (movie) => {
+  //   if (wishlist.some((m) => m === movie)) {
+  //     // If movie is in wishlist, remove it
+  //     dispatch(removeFromWishlist(movie));
+  //   } else {
+  //     // If movie is not in wishlist, add it
+  //     dispatch(addToWishlist(movie));
+  //   }
+  // };
 
   const handleSearch = () => {
     axios
@@ -83,11 +83,7 @@ export default function People() {
                           wishlist.some((m) => m === movie.id) ? "filled" : ""
                         }`}
                         onClick={(event) => {
-                          dispatch(
-                            wishlist.some((m) => m === movie.id)
-                              ? removeFromWishlist(movie.id)
-                              : addToWishlist(movie.id)
-                          );
+                          dispatch(addRemoveFavorite(movie));
                           event.preventDefault();
                         }}
                       >
