@@ -21,7 +21,6 @@ export default function ItemDetails() {
       );
       setmovierecommend(response.data.results);
       setIsLoading(false);
-      console.log(response.data.results);
 
       // Update state with response.data
     } catch (error) {
@@ -47,7 +46,7 @@ export default function ItemDetails() {
   useEffect(() => {
     getMoviesDetails(movieId.id);
     getMoviesRecommand(movieId.id);
-  }, []);
+  }, [movieId.id]);
 
   const handleWishlistToggle = (movie) => {
     if (wishlist.some((m) => m === movie)) {
@@ -84,7 +83,7 @@ export default function ItemDetails() {
           <div className="col-md-4  ">
             <img
               className="w-100 h-100"
-              src={`https://image.tmdb.org/t/p/w500/${itemdetails.poster_path}`}
+                 src={`https://image.tmdb.org/t/p/w500/${itemdetails.poster_path}`}
             />
           </div>
           <div className="col-md-8 position-relative ">
@@ -187,13 +186,13 @@ export default function ItemDetails() {
                   >
                     <img
                       className="img_recomand"
-                      src={`https://image.tmdb.org/t/p/w500//${movie.poster_path}`}
+                       src=  { movie.poster_path ? ` https://image.tmdb.org/t/p/w500//${movie.poster_path} `: 'https://placehold.co/100x150 '}
                       alt="Card image cap"
-                    />
+                    /> 
 
                     <div className="card-body d-flex  text-start  flex-column h-25 ">
                       <div className="row justify-content-between h-50 ">
-                        <h6 className="card-title fw-bold  " style={{'font-size':'13px'}}>
+                        <h6 className="card-title fw-bold  " >
                           {movie.title}
                         </h6>
 
