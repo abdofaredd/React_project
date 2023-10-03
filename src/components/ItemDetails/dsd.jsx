@@ -170,7 +170,7 @@ export default function ItemDetails() {
 
         <div className="row " style={{}}>
           {movierecommend.length > 0 ? (
-            movierecommend.slice(0, 5).map((movie, index) => (
+            movierecommend.slice(0, 20).map((movie, index) => (
               <div
                 key={index}
                 className="col-lg-2 col-md-2 mb-5 position-relative"
