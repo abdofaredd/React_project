@@ -14,7 +14,7 @@ export default function Navbar() {
   // const log_o = useSelector(state => state.logFlage.logToggle);
   return <nav className=' p-2 flex-column flex-md-row d-flex justify-content-between'>
     <div className='leftnav  flex-column flex-md-row d-flex align-items-center'>
-      <h1 className='m-0 pe-3'> Noxe</h1>
+      <h1 className='m-0 pe-3'> NOxe</h1>
      
      {log_f ? <ul className=' list-unstyled flex-column flex-md-row d-flex m-0 align-items-center'>
       <li className=' px-2'> <Link to='home'> Home</Link> </li>
